@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
-import { Accordion } from "@material-ui/core";
-import clsx from "clsx";
 import Fade from "@material-ui/core/Fade";
-import Collapse from "@material-ui/core/Collapse";
 import Typography from "@material-ui/core/Typography";
 import { links } from "../Config";
 import { Link as DomLink } from "react-router-dom";
@@ -21,7 +12,6 @@ import SortPumps from "./sortPumps";
 import FilterPump from "./FilterPump";
 import Paper from "@material-ui/core/Paper";
 import Image from "./../pump1.jpeg";
-import { func } from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -152,15 +142,11 @@ const objList = {
 
 const Search = props => {
   const classes = new useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const [questions, setQuestions] = useState([]);
+  const [pumps, setPumps] = useState([]);
   const [filterList, setFilterList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isFetching, setIsFetching] = useState(false);
   const [sortValue, setSortValue] = useState("");
-  const [limit, setLimit] = useState(1);
-  const [skip, setSkip] = useState(20);
   const [checkedItems, setCheckedItems] = useState({});
   const [pumpStatus, setPumpStatus] = useState(objList);
   const [checkboxes, setCheckboxes] = useState(checkBoxes);
@@ -177,7 +163,7 @@ const Search = props => {
         pumpsJson.map(pump => {
           pumpArray.push(pump);
         });
-        setQuestions(pumpArray);
+        setPumps(pumpArray);
         setLoading(false);
       });
   };
@@ -188,7 +174,7 @@ const Search = props => {
 
   useEffect(() => {
     filterPumps();
-  }, [questions]);
+  }, [pumps]);
 
   useEffect(() => {
     searchPump();
@@ -208,18 +194,14 @@ const Search = props => {
   }
 
   function filterPumps() {
-    //console.log(pumpList);
-    console.log(pumpStatus);
     setFilterList(
-      questions.filter(pump => {
+      pumps.filter(pump => {
         return pumpStatus[pump.pumpStatus] === true;
       })
     );
   }
   const handleChange = event => {
-    console.log(event.target.value);
-
-    sortPump(questions, event.target.value);
+    sortPump(pumps, event.target.value);
     setSortValue(event.target.value);
   };
 
@@ -235,7 +217,7 @@ const Search = props => {
 
   const searchPump = () => {
     setFilterList(
-      questions.filter(pump => {
+      pumps.filter(pump => {
         return pump.pumpName.toLowerCase().includes(search.toLowerCase());
       })
     );

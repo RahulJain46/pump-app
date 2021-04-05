@@ -102,7 +102,7 @@ let pumps = [
   }
 ];
 
-export default function SimpleSelect(props) {
+export default function SortPumps(props) {
   const classes = useStyles();
 
   return (
