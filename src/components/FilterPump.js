@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "11%",
     float: "left",
-    top: "0px",
+    top: "189px",
     position: "relative",
     backgroundColor: "#437389",
     color: "white",
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function FilterPump(props) {
   const classes = useStyles();
-
+  console.log(props);
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
       <input

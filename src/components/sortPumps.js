@@ -15,6 +15,18 @@ const useStyles = makeStyles(theme => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2)
+  },
+  [theme.breakpoints.down("600")]: {
+    formControl: {
+      position: "relative",
+      top: 100
+    }
+  },
+  [theme.breakpoints.up("1121")]: {
+    formControl: {
+      top: 100,
+      marginRight: 58
+    }
   }
 }));
 

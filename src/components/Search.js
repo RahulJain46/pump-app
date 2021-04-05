@@ -10,6 +10,7 @@ import { links } from "../Config";
 import { Link as DomLink } from "react-router-dom";
 import SortPumps from "./sortPumps";
 import FilterPump from "./FilterPump";
+import ApplicationBar from "./common/ApplicationBar";
 import Paper from "@material-ui/core/Paper";
 import Image from "./../pump1.jpeg";
 
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   pos: {
     marginBottom: 12
   },
-  question: {
+  list: {
     paddingBottom: 17,
     color: "#3562b3"
   },
@@ -78,20 +79,36 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "16px",
     paddingBottom: "0px"
   },
-  [theme.breakpoints.up("1124")]: {
+  [theme.breakpoints.up("1119")]: {
     root: {
-      position: "relative"
+      position: "relative",
+      top: 144
+    },
+    test: {
+      top: 164
+    },
+    pumpDetail: {
+      width: "60%"
+    },
+    paper: {
+      top: "86px !important"
+    },
+    searchPump: {
+      top: 100
     }
   },
   [theme.breakpoints.down("1124")]: {
     paper: {
-      top: "-88px"
+      top: "0px"
     },
     test: {
       display: "none"
     },
     root: {
       width: "100%"
+    },
+    pumpDetail: {
+      width: "50%"
     }
   },
   [theme.breakpoints.down("600")]: {
@@ -104,20 +121,34 @@ const useStyles = makeStyles(theme => ({
       display: "none"
     },
     root: {
-      width: "100%"
+      width: "100%",
+      position: "relative",
+      top: 147
     },
     imageSize: {
       height: "100px",
       width: "100px"
+    },
+    pumpDetail: {
+      width: "50%"
+    },
+    searchPump: {
+      top: 100
+    },
+    pumpContainer: {
+      paddingBottom: "92px !important"
     }
   },
   [theme.breakpoints.down("382")]: {
     imageSize: {
-      height: "86px",
-      width: "86px"
+      height: "76px",
+      width: "76px"
+    },
+    pumpDetail: {
+      width: "45%"
     },
     pumpContainer: {
-      paddingBottom: "59px !important"
+      paddingBottom: "120px !important"
     }
   }
 }));
@@ -225,7 +256,12 @@ const Search = props => {
 
   return (
     <React.Fragment>
-      <Paper className={classes.paper}>Pump Properties</Paper>
+      <ApplicationBar
+        change={filterHandleChange}
+        checkboxes={checkboxes}
+        checkedItems={checkedItems}
+      />
+      <Paper className={classes.paper}>Pump Overview</Paper>
       <div className={classes.test}>
         <FilterPump
           change={filterHandleChange}
@@ -247,16 +283,16 @@ const Search = props => {
       <SortPumps change={handleChange} sortValue={sortValue} />
       <Card className={classes.root + " PumpList"}>
         {filterList.length != 0 && !loading ? (
-          filterList.map((question, index) => (
+          filterList.map((list, index) => (
             <React.Fragment>
-              <DomLink to={`/pumpdescription` + `/${question._id}`}>
+              <DomLink to={`/pumpdescription` + `/${list._id}`}>
                 <CardContent className={classes.pumpContainer}>
                   <Typography
                     variant="h5"
                     component="h2"
-                    className={classes.question}
+                    className={classes.list}
                   >
-                    {question.pumpName}
+                    {list.pumpName}
                   </Typography>
                   <CardContent className={classes.pumpImage}>
                     <img src={Image} className={classes.imageSize} alt="logo" />
@@ -264,20 +300,20 @@ const Search = props => {
 
                   <CardContent className={classes.pumpDetail}>
                     <Typography paragraph>
-                      Model Number : {question.pumpDetail.modelNumber}{" "}
+                      Model Number : {list.pumpDetail.modelNumber}{" "}
                     </Typography>
                     <Typography paragraph>
-                      Serial Number : {question.pumpDetail.serialNumber}{" "}
+                      Serial Number : {list.pumpDetail.serialNumber}{" "}
                     </Typography>
                     <Typography paragraph>
-                      Description : {question.pumpDetail.description}{" "}
+                      Description : {list.pumpDetail.description}{" "}
                     </Typography>
                     <Typography paragraph>
-                      Location : {question.pumpDetail.location}{" "}
+                      Location : {list.pumpDetail.location}{" "}
                     </Typography>
                   </CardContent>
                   <Typography paragraph>
-                    Pump Status : {question.pumpStatus}{" "}
+                    Pump Status : {list.pumpStatus}{" "}
                   </Typography>
                 </CardContent>
               </DomLink>

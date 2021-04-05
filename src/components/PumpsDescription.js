@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
   },
   breadcrumdHeading: {
     position: "relative",
-    top: "139px",
     left: "14px"
   },
   paper: {
@@ -55,13 +54,12 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#ac7818",
     color: "#e9ecef",
     position: "relative",
-    top: "85px",
+
     fontSize: "27px"
   },
   listroot: {
     float: "left",
     width: "22%",
-    top: "144px",
     position: "relative",
     backgroundColor: "whitesmoke"
   },
@@ -76,7 +74,7 @@ const useStyles = makeStyles(theme => ({
   pos: {
     marginBottom: 12
   },
-  question: {
+  list: {
     paddingBottom: 17,
     color: "#3562b3"
   },
@@ -99,7 +97,7 @@ const useStyles = makeStyles(theme => ({
   },
   pumpDetail: {
     float: "right",
-    width: "85%",
+    width: "77%",
     backgroundColor: "whitesmoke",
     display: "inline-block",
     paddingBottom: "1px !important"
@@ -120,8 +118,7 @@ const useStyles = makeStyles(theme => ({
   },
   [theme.breakpoints.up("1107")]: {
     root: {
-      position: "relative",
-      top: 144
+      position: "relative"
     }
   },
   [theme.breakpoints.down("1171")]: {
@@ -378,15 +375,15 @@ const Search = props => {
 
       <Card className={classes.root}>
         {pumpDescriptionArray.length != 0 && !loading ? (
-          pumpDescriptionArray.map((question, index) => (
+          pumpDescriptionArray.map((list, index) => (
             <React.Fragment>
               <CardContent className={classes.pumpContainer}>
                 <Typography
                   variant="h5"
                   component="h2"
-                  className={classes.question}
+                  className={classes.list}
                 >
-                  {question.pumpName}
+                  {list.pumpName}
                 </Typography>
                 <CardContent className={classes.pumpImage}>
                   <img src={Image} className={classes.imageSize} alt="logo" />
@@ -394,16 +391,16 @@ const Search = props => {
 
                 <CardContent className={classes.pumpDetail}>
                   <Typography paragraph>
-                    Model Number : {question.pumpDetail.modelNumber}{" "}
+                    Model Number : {list.pumpDetail.modelNumber}{" "}
                   </Typography>
                   <Typography paragraph>
-                    Serial Number : {question.pumpDetail.serialNumber}{" "}
+                    Serial Number : {list.pumpDetail.serialNumber}{" "}
                   </Typography>
                   <Typography paragraph>
-                    Description : {question.pumpDetail.description}{" "}
+                    Description : {list.pumpDetail.description}{" "}
                   </Typography>
                   <Typography paragraph>
-                    Location : {question.pumpDetail.location}{" "}
+                    Location : {list.pumpDetail.location}{" "}
                   </Typography>
                 </CardContent>
               </CardContent>
@@ -415,7 +412,7 @@ const Search = props => {
                 >
                   Monitored Properties
                 </Typography>
-                {question.monitoredProperties.map(property => (
+                {list.monitoredProperties.map(property => (
                   <PropertyList property={property} />
                 ))}
               </CardContent>

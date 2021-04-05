@@ -19,7 +19,10 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   barheader: {
-    backgroundColor: "#234f64"
+    backgroundColor: "#234f64",
+    position: "relative",
+    left: "-7px",
+    marginRight: "-16px"
   },
   loginButton: {
     padding: "0px 0px",
@@ -73,7 +76,7 @@ const useStyles = makeStyles(theme => ({
       padding: 0
     },
     appbar: {
-      marginRight: -9
+      marginRight: -20
     },
     mobile: {
       width: "100%"
@@ -123,10 +126,10 @@ const objList = {
   Stopped: true
 };
 
-export default function appBar() {
+export default function ApplicationBar(props) {
   const classes = useStyles();
   const history = useHistory();
-  const [questions, setQuestions] = useState([]);
+  const [pumps, setPumps] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
   const [checkedItems, setCheckedItems] = useState({});
   const [checkboxes, setCheckboxes] = useState(checkBoxes);
@@ -149,7 +152,7 @@ export default function appBar() {
   };
   function filterPumps() {
     setFilterList(
-      questions.filter(pump => {
+      pumps.filter(pump => {
         return pumpStatus[pump.pumpStatus] === true;
       })
     );
@@ -200,9 +203,9 @@ export default function appBar() {
               >
                 <div className={classes.mobile}></div>
                 <FilterPump
-                  change={filterHandleChange}
+                  change={props.change}
                   checkboxes={checkboxes}
-                  checkedItems={checkedItems}
+                  checkedItems={props.checkedItems}
                   device="mobile"
                 />
               </Menu>

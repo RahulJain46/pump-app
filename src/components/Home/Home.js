@@ -10,7 +10,6 @@ import { Link as DomLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import { links } from "../../Config";
 import { useForm } from "react-hook-form";
-import AppBar from "../common/AppBar";
 import Search from "../Search";
 
 const useStyles = makeStyles(theme => ({
@@ -203,7 +202,6 @@ const useStyles = makeStyles(theme => ({
   },
   home: {
     flexGrow: 1,
-    marginTop: 150,
     position: "absolute",
     marginBottom: 73,
     width: "100%"
@@ -226,7 +224,8 @@ const useStyles = makeStyles(theme => ({
       width: "100%",
       left: "0%",
       right: "0%",
-      top: "0%"
+      top: "0%",
+      marginTop: "0px"
     },
     quizbutton: {
       display: "inline-block"
